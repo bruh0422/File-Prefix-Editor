@@ -18,14 +18,14 @@ for item in os.listdir(folder_path):
         print(f'({index} / {total}) ', end='')
 
         item_path = os.path.join(folder_path, item)
+        if not os.path.isfile(item_path): raise TypeError
 
-        if os.path.isfile(item_path):
-            new = os.path.join(folder_path, f'{prefix}{os.path.basename(item_path)}')
-            os.rename(item_path, new)
+        new = os.path.join(folder_path, f'{prefix}{os.path.basename(item_path)}')
+        os.rename(item_path, new)
 
-            print(f'{item_path} -> {new}')
-        else:
-            print(f'{item_path} 並非一個檔案。')
+        print(f'{item_path} -> {new}')
+    except TypeError:
+        print(f'{item_path} 並非一個檔案。')
     except Exception as e:
         print(f'未知錯誤 - ({e})')
 
